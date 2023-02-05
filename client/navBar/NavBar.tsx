@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
 import Box from '@mui/material/Box';
+import { DrawerHeader } from '../common/styledComponents';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -16,8 +17,9 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import { Home } from '../home/Home'
+import { Contact } from '../contact/Contact'
 import HomeIcon from '@mui/icons-material/Home'
 import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
 import InfoIcon from '@mui/icons-material/Info';
@@ -44,15 +46,6 @@ const closedMixin = (theme: Theme): CSSObject => ({
     width: `calc(${theme.spacing(8)} + 1px)`,
   },
 });
-
-const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'flex-end',
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-}));
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
@@ -101,29 +94,29 @@ interface DrawerLinkProps {
 }
 
 const DrawerLink: React.FC<DrawerLinkProps> = ({open, to, text, icon}) => {
+  const navigate = useNavigate()
   return (
-    <Link to={to}>
-      <ListItem>
-        <ListItemButton
+    <ListItem>
+      <ListItemButton
+        onClick={() => navigate(to)}
+          sx={{
+            minHeight: 48,
+            justifyContent: open ? 'initial' : 'center',
+            px: 2.5,
+          }}
+        >
+          <ListItemIcon
             sx={{
-              minHeight: 48,
-              justifyContent: open ? 'initial' : 'center',
-              px: 2.5,
+              minWidth: 0,
+              mr: open ? 3 : 'auto',
+              justifyContent: 'center',
             }}
           >
-            <ListItemIcon
-              sx={{
-                minWidth: 0,
-                mr: open ? 3 : 'auto',
-                justifyContent: 'center',
-              }}
-            >
-              {icon}
-            </ListItemIcon>
-            <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-        </ListItemButton>
-      </ListItem>
-    </Link>
+            {icon}
+          </ListItemIcon>
+          <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+      </ListItemButton>
+    </ListItem>
   )
 }
 
@@ -139,51 +132,61 @@ export const NavBar: React.FC = () => {
     setOpen(false);
   };
 
+  const Greeting = () => {
+    const now = new Date()
+    const hour = now.getHours()
+    return (
+      <Typography variant="h6" noWrap component="div">
+        { hour > 2 && hour <= 12 && 'Good Morning!'}
+        { hour > 12 && hour <= 17 && 'Good Afternoon!'}
+        { (hour > 17 || hour <= 2) && 'Good Evening!'}
+      </Typography>
+    )
+  }
+
   return (
     <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <AppBar position="fixed" open={open}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{
-              marginRight: 5,
-              ...(open && { display: 'none' }),
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Mini variant drawer
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
+        <CssBaseline />
         <Router>
-          <List>
-            <DrawerLink open={open} to={'/'} text={'Home'} icon={<HomeIcon />}/>
-            <DrawerLink open={open} to={'/contact'} text={'Contact'} icon={<ConnectWithoutContactIcon />}/>
-            <DrawerLink open={open} to={'/about'} text={'About'} icon={<HomeIcon />}/>
-          </List>
-        </Router>
-      </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader />
-        <Router>
-          <Routes>
-            <Route path='/' element={<Home />} />
-          </Routes>
+          <AppBar position="fixed" open={open}>
+            <Toolbar>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerOpen}
+                edge="start"
+                sx={{
+                  marginRight: 5,
+                  ...(open && { display: 'none' }),
+                }}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Greeting />
+            </Toolbar>
+          </AppBar>
+
+          <Drawer variant="permanent" open={open}>
+            <DrawerHeader>
+              <IconButton onClick={handleDrawerClose}>
+                {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+              </IconButton>
+            </DrawerHeader>
+            <Divider />
+            <List>
+              <DrawerLink open={open} to={'/'} text={'Home'} icon={<HomeIcon />}/>
+              <DrawerLink open={open} to={'/contact'} text={'Contact'} icon={<ConnectWithoutContactIcon />}/>
+              <DrawerLink open={open} to={'/about'} text={'About'} icon={<InfoIcon />}/>
+            </List>
+          </Drawer>
+          <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+            <DrawerHeader />
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/contact' element={<Contact />} />
+            </Routes>
+          </Box>
         </Router>
       </Box>
-    </Box>
   );
 }

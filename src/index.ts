@@ -5,13 +5,16 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, "../public")));
 
-app.get("/", (req: Request, res: Response, next: NextFunction): void => {
+const clientRoute = (req: Request, res: Response, next: NextFunction): void => {
   try {
     res.send("index.html");
   } catch (error) {
     next(error);
   }
-});
+}
+
+app.get("/", clientRoute);
+app.get("/*", clientRoute);
 
 const PORT = process.env.PORT || 3000;
 
