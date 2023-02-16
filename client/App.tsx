@@ -17,6 +17,7 @@ import { Contact } from './contact/Contact'
 import HomeIcon from '@mui/icons-material/Home'
 import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact'
 import InfoIcon from '@mui/icons-material/Info'
+import HighlightAltIcon from '@mui/icons-material/HighlightAlt';
 import { ThemeProvider } from '@mui/material'
 import { darkTheme, lightTheme, hotdogStandTheme } from './themes'
 import { AppBar, Drawer, DrawerLink } from './appbar/AppBar'
@@ -101,7 +102,7 @@ export const App: React.FC = () => {
             <Divider />
             <List>
               <DrawerLink open={open} to={'/'} text={'Home'} icon={<HomeIcon />}/>
-              <DrawerLink open={open} to={'/selector'} text={'Selector'} icon={<InfoIcon />}/>
+              <DrawerLink open={open} to={'/selector'} text={'Selector'} icon={<HighlightAltIcon />}/>
               <DrawerLink open={open} to={'/contact'} text={'Contact'} icon={<ConnectWithoutContactIcon />}/>
             </List>
           </Drawer>
