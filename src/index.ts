@@ -14,7 +14,7 @@ const clientRoute = (req: Request, res: Response, next: NextFunction): void => {
 }
 
 app.get("/", clientRoute);
-app.get("/*", clientRoute);
+app.get("/.*", clientRoute);
 
 const PORT = process.env.PORT || 3000;
 

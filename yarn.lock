@@ -1809,6 +1809,7 @@ __metadata:
     react-bootstrap: ^2.7.0
     react-dom: ^18.2.0
     react-router-dom: ^6.4.5
+    react-simple-animate: ^3.5.2
     ts-loader: ^9.4.2
     typescript: ^4.9.3
     webpack: ^5.75.0
@@ -3977,6 +3978,15 @@ __metadata:
   peerDependencies:
     react: ">=16.8"
   checksum: 0d471df39f0487224240f9910c2f2939519f3e9909a7b19f72767aeea2caf1c9fa4e8ea9a51b17c20051ec252db0fcc34a7a0b3068b338dd9d8eb656ffd489c1
+  languageName: node
+  linkType: hard
+
+"react-simple-animate@npm:^3.5.2":
+  version: 3.5.2
+  resolution: "react-simple-animate@npm:3.5.2"
+  peerDependencies:
+    react-dom: ^16.8.0 || ^17 || ^18
+  checksum: 9e892e95d5d0852384587a5aa6b9c2afade7f4796935f7f79cdb20f1649c909d3d8cea83c5a7784a5a6f78c0ab189bd7e786007f6b5d8bdab14685bd78767ed6
   languageName: node
   linkType: hard
 

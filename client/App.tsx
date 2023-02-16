@@ -20,6 +20,7 @@ import InfoIcon from '@mui/icons-material/Info'
 import { ThemeProvider } from '@mui/material'
 import { darkTheme, lightTheme, hotdogStandTheme } from './themes'
 import { AppBar, Drawer, DrawerLink } from './appbar/AppBar'
+import { Selector } from './selector/Selector'
 
 enum THEME_NAMES {
   LIGHT = 'light',
@@ -32,8 +33,8 @@ export const App: React.FC = () => {
   const [theme, setTheme] = React.useState<string>(THEME_NAMES.DARK)
 
   const themeForString = (themeString: string) => {
-    if (themeString === 'light') return lightTheme
-    if (themeString === 'hotdog') return hotdogStandTheme
+    if (themeString === THEME_NAMES.LIGHT) return lightTheme
+    if (themeString === THEME_NAMES.HOTDOG) return hotdogStandTheme
     return darkTheme
   }
 
@@ -100,14 +101,15 @@ export const App: React.FC = () => {
             <Divider />
             <List>
               <DrawerLink open={open} to={'/'} text={'Home'} icon={<HomeIcon />}/>
+              <DrawerLink open={open} to={'/selector'} text={'Selector'} icon={<InfoIcon />}/>
               <DrawerLink open={open} to={'/contact'} text={'Contact'} icon={<ConnectWithoutContactIcon />}/>
-              <DrawerLink open={open} to={'/about'} text={'About'} icon={<InfoIcon />}/>
             </List>
           </Drawer>
           <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
             <DrawerHeader />
             <Routes>
               <Route path='/' element={<Home />} />
+              <Route path='/selector' element={<Selector />} />
               <Route path='/contact' element={<Contact />} />
             </Routes>
           </Box>

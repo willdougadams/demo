@@ -1,4 +1,4 @@
-import { ThemeProvider, createTheme, Theme } from '@mui/material/styles'
+import { createTheme } from '@mui/material/styles'
 
 export const darkTheme = createTheme({
   palette: {
