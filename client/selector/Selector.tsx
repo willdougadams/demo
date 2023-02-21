@@ -11,15 +11,15 @@ interface Coords {
 
 interface CellProps {
   selected: boolean
-  setMouseDownLocation: (location: Coords, event: CellMouseEvent) => void
-  setMouseUpLocation: (location: Coords, event: CellMouseEvent) => void
+  click: (location: Coords, event: CellMouseEvent) => void
+  unclick: (location: Coords, event: CellMouseEvent) => void
   cellLocation: Coords
 }
 
 const Cell: React.FC<CellProps> = ({
   selected,
-  setMouseDownLocation,
-  setMouseUpLocation,
+  click,
+  unclick,
   cellLocation
 }) => {
   const theme = useTheme()
@@ -35,8 +35,8 @@ const Cell: React.FC<CellProps> = ({
           backgroundColor: `${selected ? theme.palette.primary.main : theme.palette.primary.dark}`
         }
       }
-      onMouseDown={(e) => setMouseDownLocation(cellLocation, e)}
-      onMouseUp={(e) => setMouseUpLocation(cellLocation, e)}
+      onMouseDown={(e) => click(cellLocation, e)}
+      onMouseUp={(e) => unclick(cellLocation, e)}
     ></div>
   )
 }
@@ -83,7 +83,7 @@ export const Selector: React.FC = () => {
     setStartPixel({x: event.pageX, y: event.pageY})
   }
 
-  const unclick = (cellLocation: Coords, event: CellMouseEvent) => {
+  const unclick = (cellLocation: Coords) => {
     setClicked(false)
     setEndLocation(cellLocation)
   }
@@ -99,12 +99,12 @@ export const Selector: React.FC = () => {
     for (let row=0; row < SIZE; row++) {
       const newRow: JSX.Element[] = []
       for (let col=0; col < SIZE; col++) {
-        let selected = row >= startRow && row <= endRow && col >= startCol && col <= endCol && !clicked
+        const selected = row >= startRow && row <= endRow && col >= startCol && col <= endCol && !clicked
         const newCell = <Cell
           key={`${row}${col}`} 
           selected={selected}
-          setMouseDownLocation={click}
-          setMouseUpLocation={unclick}
+          click={click}
+          unclick={unclick}
           cellLocation={{x: col, y: row}}
           />
         newRow.push(newCell)

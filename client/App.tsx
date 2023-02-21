@@ -11,22 +11,29 @@ import MenuIcon from '@mui/icons-material/Menu'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import Select from '@mui/material/Select'
 import MenuItem from '@mui/material/MenuItem'
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Home } from './home/Home'
 import { Contact } from './contact/Contact'
 import HomeIcon from '@mui/icons-material/Home'
 import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact'
-import InfoIcon from '@mui/icons-material/Info'
 import HighlightAltIcon from '@mui/icons-material/HighlightAlt';
 import { ThemeProvider } from '@mui/material'
 import { darkTheme, lightTheme, hotdogStandTheme } from './themes'
 import { AppBar, Drawer, DrawerLink } from './appbar/AppBar'
 import { Selector } from './selector/Selector'
+import { Game } from './game/SimpleGame'
 
 enum THEME_NAMES {
   LIGHT = 'light',
   DARK = 'dark',
   HOTDOG = 'hotdog'
+}
+
+enum PATHS {
+  HOME = '/',
+  SELECTOR = '/selector',
+  CONTACT = '/contact',
+  GAME = '/game'
 }
 
 export const App: React.FC = () => {
@@ -101,17 +108,19 @@ export const App: React.FC = () => {
             </DrawerHeader>
             <Divider />
             <List>
-              <DrawerLink open={open} to={'/'} text={'Home'} icon={<HomeIcon />}/>
-              <DrawerLink open={open} to={'/selector'} text={'Selector'} icon={<HighlightAltIcon />}/>
-              <DrawerLink open={open} to={'/contact'} text={'Contact'} icon={<ConnectWithoutContactIcon />}/>
+              <DrawerLink open={open} to={PATHS.HOME} text={'Home'} icon={<HomeIcon />}/>
+              <DrawerLink open={open} to={PATHS.SELECTOR} text={'Selector'} icon={<HighlightAltIcon />}/>
+              {/*<DrawerLink open={open} to={PATHS.GAME} text={'Simple Game'} icon={<HighlightAltIcon />}/>*/}
+              <DrawerLink open={open} to={PATHS.CONTACT} text={'Contact'} icon={<ConnectWithoutContactIcon />}/>
             </List>
           </Drawer>
           <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
             <DrawerHeader />
             <Routes>
-              <Route path='/' element={<Home />} />
-              <Route path='/selector' element={<Selector />} />
-              <Route path='/contact' element={<Contact />} />
+              <Route path={PATHS.HOME} element={<Home />} />
+              <Route path={PATHS.SELECTOR} element={<Selector />} />
+              {/*<Route path={PATHS.GAME} element={<Game />} />*/}
+              <Route path={PATHS.CONTACT} element={<Contact />} />
             </Routes>
           </Box>
         </Router>
