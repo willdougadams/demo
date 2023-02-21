@@ -8,12 +8,16 @@ const WIDTH = 1080
 class MainScene extends Phaser.Scene {
   private square: Phaser.GameObjects.Rectangle & { body: Phaser.Physics.Arcade.Body }
 
+  constructor(args: any) {
+    super(args)
+    this.square = this.add.rectangle(400, 96, 100, 100, 0xFFFFFF) as any
+  }
+
   init () {
     this.cameras.main.setBackgroundColor('#24252A')
   }
 
   create () {
-    this.square = this.add.rectangle(400, 96, 100, 100, 0xFFFFFF) as any
     this.square.body.collideWorldBounds = true
     // this.square.body.bounce.y = 0.7
     // this.square.body.bounce.x = 0.7

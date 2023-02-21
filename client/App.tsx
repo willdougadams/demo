@@ -110,7 +110,7 @@ export const App: React.FC = () => {
             <List>
               <DrawerLink open={open} to={PATHS.HOME} text={'Home'} icon={<HomeIcon />}/>
               <DrawerLink open={open} to={PATHS.SELECTOR} text={'Selector'} icon={<HighlightAltIcon />}/>
-              <DrawerLink open={open} to={PATHS.GAME} text={'Simple Game'} icon={<HighlightAltIcon />}/>
+              {/*<DrawerLink open={open} to={PATHS.GAME} text={'Simple Game'} icon={<HighlightAltIcon />}/>*/}
               <DrawerLink open={open} to={PATHS.CONTACT} text={'Contact'} icon={<ConnectWithoutContactIcon />}/>
             </List>
           </Drawer>
@@ -119,7 +119,7 @@ export const App: React.FC = () => {
             <Routes>
               <Route path={PATHS.HOME} element={<Home />} />
               <Route path={PATHS.SELECTOR} element={<Selector />} />
-              <Route path={PATHS.GAME} element={<Game />} />
+              {/*<Route path={PATHS.GAME} element={<Game />} />*/}
               <Route path={PATHS.CONTACT} element={<Contact />} />
             </Routes>
           </Box>
