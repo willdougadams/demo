@@ -6,7 +6,7 @@ export const Contact: React.FC = () => {
   return (
     <Box>
       <Typography variant="h5" align='center'>
-        I'm looking for a full-time position in web development!
+        I&apos;m looking for a full-time position in web development!
       </Typography>
       <br />
       <Typography variant='subtitle1' align='center' sx={{textDecoration: 'underline'}}>

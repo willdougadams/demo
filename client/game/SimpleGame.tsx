@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import Phaser from 'phaser'
 import { IonPhaser, GameInstance } from '@ion-phaser/react'
-import { Button } from '@mui/material'
 
 const HEIGHT = 720
 const WIDTH = 1080
@@ -21,7 +20,9 @@ class MainScene extends Phaser.Scene {
     this.physics.add.existing(this.square);
   }
 
-  update () {}
+  update () {
+    console.log('UPDATE')
+  }
 }
 
 const gameConfig: GameInstance = {

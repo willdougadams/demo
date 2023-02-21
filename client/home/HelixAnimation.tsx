@@ -24,7 +24,7 @@ class Axis extends React.Component {
   }
 
   prepareCords() {
-    let coords: Coords = {
+    const coords: Coords = {
       x1: this.props.x as number,
       y1: this.props.y as number
     }
@@ -41,7 +41,7 @@ class Axis extends React.Component {
   }
 
   render() {
-    let coords = this.prepareCords();
+    const coords = this.prepareCords();
     return (
       <div style={{width: this.props.length, height: '15px'}}>
         <AnimateKeyframes 

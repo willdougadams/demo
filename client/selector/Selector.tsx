@@ -83,7 +83,7 @@ export const Selector: React.FC = () => {
     setStartPixel({x: event.pageX, y: event.pageY})
   }
 
-  const unclick = (cellLocation: Coords, event: CellMouseEvent) => {
+  const unclick = (cellLocation: Coords) => {
     setClicked(false)
     setEndLocation(cellLocation)
   }
@@ -99,7 +99,7 @@ export const Selector: React.FC = () => {
     for (let row=0; row < SIZE; row++) {
       const newRow: JSX.Element[] = []
       for (let col=0; col < SIZE; col++) {
-        let selected = row >= startRow && row <= endRow && col >= startCol && col <= endCol && !clicked
+        const selected = row >= startRow && row <= endRow && col >= startCol && col <= endCol && !clicked
         const newCell = <Cell
           key={`${row}${col}`} 
           selected={selected}
