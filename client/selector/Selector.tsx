@@ -130,10 +130,10 @@ export const Selector: React.FC = () => {
         {generateCells()}
       </div>
       <List>
-        Overall, I'm happy with the result.  Things I'd improve on with more time:
+        Overall, I&apos;m happy with the result.  Things I&apos;d improve on with more time:
 
         <ListItem>
-          1 - I'd separate the grid logic from the Cell components.  There's currently
+          1 - I&apos;d separate the grid logic from the Cell components.  There&apos;s currently
           a bug that prevents mouseDown and mouseUp events from registering correctly
           if either occurs between cells or outside the grid.
         </ListItem>
@@ -144,7 +144,7 @@ export const Selector: React.FC = () => {
           3 - Add a button to clear the selection
         </ListItem>
         <ListItem>
-          4 - Doesn't work with the hotdog stand theme, which uses the same color for selected and unselected cells
+          4 - Doesn&apos;t work with the hotdog stand theme, which uses the same color for selected and unselected cells
         </ListItem>
       </List>
     </Box>
