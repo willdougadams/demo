@@ -1,5 +1,6 @@
 import React from 'react'
 import { useTheme } from '@mui/material/styles';
+import { Box, List, Typography, ListItem } from '@mui/material';
 
 const SIZE = 10
 type CellMouseEvent = React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -116,9 +117,36 @@ export const Selector: React.FC = () => {
   }
 
   return (
-    <div onMouseMove={(e)=> setMousePosition({x: e.pageX, y: e.pageY})}>
-      <SelectionBox clicked={clicked} start={startPixel} end={mousePosition} />
-      {generateCells()}
-    </div>
+    <Box>
+      <Typography>
+        The result of a fun exercise I found on dev.to
+      </Typography>
+      <Typography>
+        Goal is to create a grid of cells that could be selected by clicking
+        and dragging in under one hour.
+      </Typography>
+      <div onMouseMove={(e)=> setMousePosition({x: e.pageX, y: e.pageY})}>
+        <SelectionBox clicked={clicked} start={startPixel} end={mousePosition} />
+        {generateCells()}
+      </div>
+      <List>
+        Overall, I'm happy with the result.  Things I'd improve on with more time:
+
+        <ListItem>
+          1 - I'd separate the grid logic from the Cell components.  There's currently
+          a bug that prevents mouseDown and mouseUp events from registering correctly
+          if either occurs between cells or outside the grid.
+        </ListItem>
+        <ListItem>
+          2 - Restyle to make it more of a grid; currently it looks more like a field of blank buttons
+        </ListItem>
+        <ListItem>
+          3 - Add a button to clear the selection
+        </ListItem>
+        <ListItem>
+          4 - Doesn't work with the hotdog stand theme, which uses the same color for selected and unselected cells
+        </ListItem>
+      </List>
+    </Box>
   )
 }
