@@ -16,9 +16,7 @@ jobs:
           name: Lint
       - persist_to_workspace:
           root: .
-          paths:
-            - node_modules/
-            - package.json
+          paths: .
   run_unit_tests:
     executor: node/default
     steps:
