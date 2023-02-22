@@ -5,7 +5,7 @@ orbs:
   heroku: circleci/heroku@1.2.6
 
 jobs:
-  build_and_test:
+  initial_checks:
     executor: node/default
     steps:
       - checkout
@@ -14,15 +14,29 @@ jobs:
       - run:
           command: yarn lint
           name: Lint
+      - persist_to_workspace:
+          root: .
+          paths: .
+  run_unit_tests:
+    executor: node/default
+    steps:
+      - attach_workspace:
+          at: .
       - run:
           command: yarn test
           name: Run tests
+  build:
+    executor: node/default
+    steps:
+      - attach_workspace:
+          at: .
       - run:
           command: yarn build
           name: Build app
       - persist_to_workspace:
-          root: ~/project
-          paths: .
+          root: .
+          paths:
+            - public/
 
 
 # Invoke jobs via workflows
@@ -30,10 +44,16 @@ jobs:
 workflows:
   build_test_deploy:
     jobs:
-      - build_and_test
+      - initial_checks
+      - run_unit_tests:
+          requires:
+            - initial_checks
+      - build:
+          requires:
+            - run_unit_tests
       - heroku/deploy-via-git:
           requires:
-            - build_and_test
+            - build
           filters:
             branches:
               only: main
