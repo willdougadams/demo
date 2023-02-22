@@ -35,7 +35,7 @@ jobs:
       - run:
           command: yarn build
           name: Build app
-    persist_workspace:
+    persist_to_workspace:
       root: .
       paths:
         - public/
