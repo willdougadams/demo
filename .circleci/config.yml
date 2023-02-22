@@ -14,24 +14,31 @@ jobs:
       - run:
           command: yarn lint
           name: Lint
-      - persist_to_workspace:
-          root: ~/project
-          paths: .
-      
+    persist_to_workspace:
+      root: .
+      paths:
+        - node_modules/
+        - package.json
   run_unit_tests:
     executor: node/default
     steps:
-      - attach_workspace:
-          at: /tmp/workspace
+    - attach_workspace:
+        at: .
       - run:
           command: yarn test
           name: Run tests
+  build:
+    executor: node/default
+    steps:
+      - attach_workspace:
+        at: .
       - run:
           command: yarn build
           name: Build app
-      - persist_to_workspace:
-          root: ~/project
-          paths: .
+    persist_workspace:
+      root: .
+      paths:
+        - public/
 
 
 # Invoke jobs via workflows
@@ -43,9 +50,12 @@ workflows:
       - run_unit_tests:
           requires:
             - initial_checks
-      - heroku/deploy-via-git:
+      - build:
           requires:
             - run_unit_tests
+      - heroku/deploy-via-git:
+          requires:
+            - build
           filters:
             branches:
               only: main
