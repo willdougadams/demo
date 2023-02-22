@@ -22,8 +22,8 @@ jobs:
   run_unit_tests:
     executor: node/default
     steps:
-    - attach_workspace:
-        at: .
+      - attach_workspace:
+          at: .
       - run:
           command: yarn test
           name: Run tests
