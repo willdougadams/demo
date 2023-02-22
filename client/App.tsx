@@ -21,7 +21,7 @@ import { ThemeProvider } from '@mui/material'
 import { darkTheme, lightTheme, hotdogStandTheme } from './themes'
 import { AppBar, Drawer, DrawerLink } from './appbar/AppBar'
 import { Selector } from './selector/Selector'
-import { Game } from './game/SimpleGame'
+// import { Game } from './game/SimpleGame'
 
 enum THEME_NAMES {
   LIGHT = 'light',
