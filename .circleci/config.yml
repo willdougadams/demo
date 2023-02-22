@@ -14,6 +14,9 @@ jobs:
       - run:
           command: yarn lint
           name: Lint
+      - persist_to_workspace:
+          root: ~/project
+          paths: .
       
   run_unit_tests:
     executor: node/default
