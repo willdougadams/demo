@@ -62,7 +62,7 @@ export const Home: React.FC = () => {
       Just for fun let&apos;s have Github Copilot write an intro for my demo site:
       <Paper sx={{marginLeft: "2vw"}}>
         I&apos;m a full-stack web developer with a passion for learning and a desire to build things that make people&apos;s lives better.
-        I have a BS in Computer Science from CSUMB and have been working in the industry for 5 years. I&apos;ve worked on a variety of 
+        I have a BS in Computer Science from CSUMB and have been working in the industry for 5 years. I&apos;ve worked on a variety of
         projects from small internal tools to large-scale web applications. I&apos;m a quick learner and have a passion for learning however
         I can. I&apos;m a strong communicator and have experience working with teams of all sizes. I&apos;m a strong advocate for writing clean,
         maintainable code and I&apos;m always looking for ways to improve my skills.
