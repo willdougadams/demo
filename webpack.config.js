@@ -2,6 +2,10 @@ const path = require("path");
 
 module.exports = {
   entry: "./client/index.tsx",
+  devServer: {
+    publicPath: '/',
+    historyApiFallback: true,
+  },
   module: {
     rules: [
       {
